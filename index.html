@@ -160,24 +160,6 @@
             color: var(--secondary);
         }
 
-        .btn-nav {
-            background: var(--secondary);
-            color: white;
-            padding: 0.6rem 1.8rem;
-            border-radius: 60px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all var(--transition);
-            box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
-            white-space: nowrap;
-            font-size: 0.95rem;
-        }
-
-        .btn-nav:hover {
-            background: var(--secondary-dark);
-            transform: translateY(-2px);
-        }
-
         /* ========== HERO ========== */
         .hero {
             padding: 130px 0 70px;
@@ -276,15 +258,15 @@
             font-weight: 900;
         }
 
-        /* ========== SUPPLIER SECTION ========== */
-        .supplier-section {
+        /* ========== SUPPLIER CTA SECTION (NEW - BOTTOM OF PAGE) ========== */
+        .supplier-cta-section {
             padding: 5rem 0;
             background: linear-gradient(160deg, #fefefe 0%, #fff7ed 40%, #fef9f0 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .supplier-section::before {
+        .supplier-cta-section::before {
             content: '';
             position: absolute;
             top: -80px;
@@ -296,7 +278,7 @@
             pointer-events: none;
         }
 
-        .supplier-section::after {
+        .supplier-cta-section::after {
             content: '';
             position: absolute;
             bottom: -60px;
@@ -308,16 +290,15 @@
             pointer-events: none;
         }
 
-        .supplier-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
+        .supplier-cta-content {
             position: relative;
             z-index: 1;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .supplier-info h2 {
+        .supplier-cta-content h2 {
             font-size: 2.3rem;
             font-weight: 900;
             color: var(--primary);
@@ -325,14 +306,15 @@
             line-height: 1.3;
         }
 
-        .supplier-info h2 span {
+        .supplier-cta-content h2 span {
             color: var(--secondary);
         }
 
-        .supplier-info .subtitle {
+        .supplier-cta-content .subtitle {
             font-size: 1.15rem;
             color: var(--gray-600);
             margin-bottom: 2rem;
+            line-height: 1.8;
         }
 
         .trust-badges {
@@ -340,6 +322,7 @@
             flex-wrap: wrap;
             gap: 0.8rem;
             margin-bottom: 2rem;
+            justify-content: center;
         }
 
         .trust-badge {
@@ -361,22 +344,99 @@
             font-size: 1.1rem;
         }
 
-        .supplier-card {
+        .btn-supplier-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-supplier-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(249, 115, 22, 0.45);
+        }
+
+        /* ========== MODAL POPUP ========== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-popup {
             background: white;
             border-radius: var(--radius-lg);
             padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
             box-shadow: var(--shadow-xl);
-            border: 1px solid var(--gray-200);
+            transform: translateY(20px);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
+        }
+
+        .modal-overlay.show .modal-popup {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gray-100);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--gray-600);
             transition: all var(--transition);
         }
 
-        .supplier-card:hover {
-            box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.18);
-            transform: translateY(-3px);
+        [dir="ltr"] .modal-close {
+            right: auto;
+            left: 1rem;
         }
 
-        .supplier-card .card-icon {
+        .modal-close:hover {
+            background: var(--gray-200);
+            color: var(--primary);
+        }
+
+        .modal-popup .card-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
@@ -386,14 +446,15 @@
             justify-content: center;
             font-size: 1.6rem;
             color: white;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 1.5rem;
         }
 
-        .supplier-card h3 {
+        .modal-popup h3 {
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary);
             margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .form-group {
@@ -463,6 +524,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            margin-top: 1rem;
         }
 
         .btn-submit:hover {
@@ -809,7 +871,7 @@
         /* ========== TOAST ========== */
         .toast-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 9999; display: flex;
+            background: rgba(0,0,0,0.5); z-index: 10000; display: flex;
             align-items: center; justify-content: center; opacity: 0; visibility: hidden;
             transition: all 0.3s;
         }
@@ -832,8 +894,7 @@
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
-            .supplier-grid { grid-template-columns: 1fr; gap: 2rem; }
-            .supplier-info h2 { font-size: 1.8rem; }
+            .supplier-cta-content h2 { font-size: 1.8rem; }
             .hero h1 { font-size: 2.4rem; }
             .comparison-grid { grid-template-columns: 1fr; }
             .step { flex-direction: column; text-align: center; }
@@ -845,7 +906,6 @@
             .header-content { gap: 0.5rem; }
             .lang-selector { gap: 2px; padding: 3px; }
             .lang-btn { padding: 0.35rem 0.6rem; font-size: 0.75rem; }
-            .btn-nav { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
             .logo { height: 38px; }
             .back-to-top { bottom: 85px; right: 16px; }
             [dir="ltr"] .back-to-top { right: auto; left: 16px; }
@@ -853,17 +913,17 @@
             [dir="ltr"] .whatsapp-float { left: auto; right: 16px; }
             .mobile-cta { display: block; }
             .container { padding: 0 16px; }
-            .supplier-card { padding: 1.8rem; }
+            .modal-popup { padding: 1.8rem; }
             .trust-cta { padding: 2.5rem 1.5rem; border-radius: 1.2rem; }
             .trust-cta h2 { font-size: 1.5rem; }
+            .supplier-cta-content h2 { font-size: 1.5rem; }
+            .btn-supplier-cta { padding: 0.8rem 1.8rem; font-size: 1rem; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 1.6rem; }
             .hero p { font-size: 1rem; }
             .btn { padding: 0.65rem 1.3rem; font-size: 0.9rem; }
             .lang-btn { padding: 0.3rem 0.5rem; font-size: 0.7rem; }
-            .btn-nav { padding: 0.45rem 1rem; font-size: 0.78rem; }
-            .supplier-info h2 { font-size: 1.5rem; }
             .trust-badges { gap: 0.5rem; }
             .trust-badge { font-size: 0.75rem; padding: 0.45rem 0.8rem; }
         }
@@ -879,7 +939,6 @@
                     <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 Français</button>
                     <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 English</button>
                 </div>
-                <a href="#download" class="btn-nav" data-translate="nav_cta">سجل متجرك مجاناً</a>
             </div>
         </div>
     </header>
@@ -892,7 +951,6 @@
                 <h1 data-translate="hero_title">توقف عن تضييع الوقت في البحث عن السلعة.<br>احصل على أفضل <span>عروض الجملة</span> وأنت في محلك!</h1>
                 <p data-translate="hero_desc">منصة Hamize تربطك مباشرة بأكبر الموردين والمصنعين في الجزائر. اطلب عروض الأسعار بسرية تامة، قارن، وأعد تموين متجرك بكل سهولة وبدون وسطاء.</p>
                 <div class="cta-group">
-                    <a href="#download" class="btn btn-primary" data-translate="hero_cta1"><i class="fas fa-user-plus"></i> أنشئ حسابك وابدأ</a>
                     <a href="#how-it-works" class="btn btn-outline" data-translate="hero_cta2">كيف تعمل المنصة؟</a>
                 </div>
             </div>
@@ -902,68 +960,6 @@
         <div class="social-proof">
             <p data-translate="social_proof">🔥 <span>+500</span> تاجر وحرفي يستخدمون Hamize يومياً</p>
         </div>
-
-        <!-- SUPPLIER SECTION -->
-        <section class="supplier-section" id="supplier-section">
-            <div class="container">
-                <div class="supplier-grid">
-                    <div class="supplier-info fade-up">
-                        <h2 data-translate="supplier_title">هل أنت <span>مورد أو مصنع؟</span></h2>
-                        <p class="subtitle" data-translate="supplier_subtitle">انضم إلى Hamize وابدأ في استقبال طلبات الشراء من المتاجر في كل الجزائر.</p>
-                        <div class="trust-badges">
-                            <span class="trust-badge"><i class="fas fa-shield-alt"></i> <span data-translate="badge1">مورد موثق</span></span>
-                            <span class="trust-badge"><i class="fas fa-chart-line"></i> <span data-translate="badge2">فرص بيع جديدة</span></span>
-                            <span class="trust-badge"><i class="fas fa-store"></i> <span data-translate="badge3">آلاف المتاجر</span></span>
-                        </div>
-                    </div>
-                    <div class="supplier-card fade-up" id="supplierFormCard">
-                        <div class="card-icon"><i class="fas fa-truck-fast"></i></div>
-                        <h3 data-translate="form_title">سجل كمورد الآن</h3>
-                        <form id="supplierForm" novalidate>
-                            <div class="form-group">
-                                <label data-translate="form_company">اسم الشركة</label>
-                                <input type="text" id="companyName" data-translate-placeholder="form_company_ph" placeholder="أدخل اسم شركتك" required>
-                                <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
-                            </div>
-                            <div class="form-group">
-                                <label data-translate="form_phone">رقم الهاتف</label>
-                                <input type="tel" id="phoneNumber" data-translate-placeholder="form_phone_ph" placeholder="05XXXXXXXX" required>
-                                <span class="error-msg" data-translate="error_phone">رقم هاتف غير صالح</span>
-                            </div>
-                            <div class="form-group">
-                                <label data-translate="form_email">البريد الإلكتروني</label>
-                                <input type="email" id="emailAddress" data-translate-placeholder="form_email_ph" placeholder="example@email.com" required>
-                                <span class="error-msg" data-translate="error_email">بريد إلكتروني غير صالح</span>
-                            </div>
-                            <div class="form-group">
-                                <label data-translate="form_business">نوع النشاط</label>
-                                <select id="businessType" required>
-                                    <option value="" data-translate="form_business_select">اختر نوع النشاط</option>
-                                    <option value="manufacturer" data-translate="form_business_opt1">مصنع</option>
-                                    <option value="wholesaler" data-translate="form_business_opt2">تاجر جملة</option>
-                                    <option value="importer" data-translate="form_business_opt3">مستورد</option>
-                                    <option value="distributor" data-translate="form_business_opt4">موزع</option>
-                                </select>
-                                <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
-                            </div>
-                            <div class="form-group">
-                                <label data-translate="form_wilaya">الولاية</label>
-                                <select id="wilaya" required>
-                                    <option value="" data-translate="form_wilaya_select">اختر ولايتك</option>
-                                    <option value="01">أدرار</option><option value="16">الجزائر</option><option value="31">وهران</option>
-                                    <option value="25">قسنطينة</option><option value="09">البليدة</option><option value="13">تلمسان</option>
-                                    <option value="05">باتنة</option><option value="23">عنابة</option><option value="19">سطيف</option>
-                                </select>
-                                <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
-                            </div>
-                            <button type="submit" class="btn-submit" data-translate="form_submit">
-                                <i class="fas fa-paper-plane"></i> سجل كمورد الآن
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Pain points -->
         <section class="container" style="padding: 5rem 0;">
@@ -1038,6 +1034,24 @@
             </div>
         </section>
 
+        <!-- SUPPLIER CTA SECTION (MOVED HERE - BEFORE DOWNLOAD) -->
+        <section class="supplier-cta-section" id="supplier-section">
+            <div class="container">
+                <div class="supplier-cta-content fade-up">
+                    <h2 data-translate="supplier_title">هل أنت <span>مورد أو مصنع؟</span></h2>
+                    <p class="subtitle" data-translate="supplier_subtitle">انضم إلى Hamize وابدأ في استقبال طلبات الشراء من المتاجر في كل الجزائر. سجّل الآن وكن جزءاً من أكبر منصة B2B في الجزائر.</p>
+                    <div class="trust-badges">
+                        <span class="trust-badge"><i class="fas fa-shield-alt"></i> <span data-translate="badge1">مورد موثق</span></span>
+                        <span class="trust-badge"><i class="fas fa-chart-line"></i> <span data-translate="badge2">فرص بيع جديدة</span></span>
+                        <span class="trust-badge"><i class="fas fa-store"></i> <span data-translate="badge3">آلاف المتاجر</span></span>
+                    </div>
+                    <button class="btn-supplier-cta" id="btnOpenSupplierModal" data-translate="supplier_cta_btn">
+                        <i class="fas fa-truck-fast"></i> طلب تسجيل مورد
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <!-- CTA -->
         <section id="download">
             <div class="container">
@@ -1064,6 +1078,56 @@
             <p style="font-size: 0.85rem;" data-translate="footer_copy">© 2025 Hamize. جميع الحقوق محفوظة.</p>
         </div>
     </footer>
+
+    <!-- SUPPLIER REGISTRATION MODAL -->
+    <div class="modal-overlay" id="supplierModal">
+        <div class="modal-popup">
+            <button class="modal-close" id="btnCloseModal" aria-label="إغلاق">&times;</button>
+            <div class="card-icon"><i class="fas fa-truck-fast"></i></div>
+            <h3 data-translate="form_title">سجل كمورد الآن</h3>
+            <form id="supplierForm" novalidate>
+                <div class="form-group">
+                    <label data-translate="form_company">اسم الشركة</label>
+                    <input type="text" id="companyName" data-translate-placeholder="form_company_ph" placeholder="أدخل اسم شركتك" required>
+                    <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                    <label data-translate="form_phone">رقم الهاتف</label>
+                    <input type="tel" id="phoneNumber" data-translate-placeholder="form_phone_ph" placeholder="05XXXXXXXX" required>
+                    <span class="error-msg" data-translate="error_phone">رقم هاتف غير صالح</span>
+                </div>
+                <div class="form-group">
+                    <label data-translate="form_email">البريد الإلكتروني</label>
+                    <input type="email" id="emailAddress" data-translate-placeholder="form_email_ph" placeholder="example@email.com" required>
+                    <span class="error-msg" data-translate="error_email">بريد إلكتروني غير صالح</span>
+                </div>
+                <div class="form-group">
+                    <label data-translate="form_business">نوع النشاط</label>
+                    <select id="businessType" required>
+                        <option value="" data-translate="form_business_select">اختر نوع النشاط</option>
+                        <option value="manufacturer" data-translate="form_business_opt1">مصنع</option>
+                        <option value="wholesaler" data-translate="form_business_opt2">تاجر جملة</option>
+                        <option value="importer" data-translate="form_business_opt3">مستورد</option>
+                        <option value="distributor" data-translate="form_business_opt4">موزع</option>
+                    </select>
+                    <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
+                </div>
+                <div class="form-group">
+                    <label data-translate="form_wilaya">الولاية</label>
+                    <select id="wilaya" required>
+                        <option value="" data-translate="form_wilaya_select">اختر ولايتك</option>
+                        <option value="01">أدرار</option><option value="16">الجزائر</option><option value="31">وهران</option>
+                        <option value="25">قسنطينة</option><option value="09">البليدة</option><option value="13">تلمسان</option>
+                        <option value="05">باتنة</option><option value="23">عنابة</option><option value="19">سطيف</option>
+                    </select>
+                    <span class="error-msg" data-translate="error_required">هذا الحقل مطلوب</span>
+                </div>
+                <button type="submit" class="btn-submit" data-translate="form_submit">
+                    <i class="fas fa-paper-plane"></i> سجل كمورد الآن
+                </button>
+            </form>
+        </div>
+    </div>
 
     <!-- Floating WhatsApp -->
     <a href="https://wa.me/213557048595?text=السلام%20عليكم%20أريد%20الاستفسار%20عن%20منصة%20Hamize" target="_blank" class="whatsapp-float" aria-label="WhatsApp" title="تواصل عبر WhatsApp">
@@ -1098,7 +1162,8 @@
                 hero_cta2: 'كيف تعمل المنصة؟',
                 social_proof: '🔥 <span>+500</span> تاجر وحرفي يستخدمون Hamize يومياً',
                 supplier_title: 'هل أنت <span>مورد أو مصنع؟</span>',
-                supplier_subtitle: 'انضم إلى Hamize وابدأ في استقبال طلبات الشراء من المتاجر في كل الجزائر.',
+                supplier_subtitle: 'انضم إلى Hamize وابدأ في استقبال طلبات الشراء من المتاجر في كل الجزائر. سجّل الآن وكن جزءاً من أكبر منصة B2B في الجزائر.',
+                supplier_cta_btn: '<i class="fas fa-truck-fast"></i> طلب تسجيل مورد',
                 badge1: 'مورد موثق',
                 badge2: 'فرص بيع جديدة',
                 badge3: 'آلاف المتاجر',
@@ -1200,7 +1265,8 @@
                 hero_cta2: 'Comment ça marche ?',
                 social_proof: '🔥 <span>+500</span> commerçants utilisent Hamize',
                 supplier_title: 'Vous êtes <span>fournisseur ou fabricant ?</span>',
-                supplier_subtitle: 'Rejoignez Hamize et recevez des demandes d\'achat de commerçants partout en Algérie.',
+                supplier_subtitle: 'Rejoignez Hamize et recevez des demandes d\'achat de commerçants partout en Algérie. Inscrivez-vous maintenant.',
+                supplier_cta_btn: '<i class="fas fa-truck-fast"></i> Demander l\'inscription fournisseur',
                 badge1: 'Fournisseur vérifié',
                 badge2: 'Nouvelles opportunités',
                 badge3: 'Des milliers de magasins',
@@ -1297,7 +1363,8 @@
                 hero_cta2: 'How It Works?',
                 social_proof: '🔥 <span>+500</span> merchants use Hamize',
                 supplier_title: 'Are you a <span>Supplier or Manufacturer?</span>',
-                supplier_subtitle: 'Join Hamize and get purchase requests from stores across Algeria.',
+                supplier_subtitle: 'Join Hamize and get purchase requests from stores across Algeria. Register now.',
+                supplier_cta_btn: '<i class="fas fa-truck-fast"></i> Request Supplier Registration',
                 badge1: 'Verified Supplier',
                 badge2: 'New Sales',
                 badge3: 'Thousands of Stores',
@@ -1415,7 +1482,6 @@
 
             updateWhatsAppLink(lang);
             setupFAQ();
-            document.documentElement.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
         }
 
         function updateWhatsAppLink(lang) {
@@ -1451,6 +1517,27 @@
             });
         }
 
+        // ==================== MODAL SYSTEM ====================
+        function setupModal() {
+            const modal = document.getElementById('supplierModal');
+            const btnOpen = document.getElementById('btnOpenSupplierModal');
+            const btnClose = document.getElementById('btnCloseModal');
+
+            btnOpen.addEventListener('click', () => modal.classList.add('show'));
+            btnClose.addEventListener('click', () => modal.classList.remove('show'));
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.classList.remove('show');
+            });
+
+            // Close on ESC key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                }
+            });
+        }
+
+        // ==================== FORM SYSTEM ====================
         function setupSupplierForm() {
             const form = document.getElementById('supplierForm');
             if (!form) return;
@@ -1465,8 +1552,15 @@
                         businessType: document.getElementById('businessType').options[document.getElementById('businessType').selectedIndex].text,
                         wilaya: document.getElementById('wilaya').options[document.getElementById('wilaya').selectedIndex].text
                     };
+                    
+                    // Close modal first
+                    document.getElementById('supplierModal').classList.remove('show');
+                    
+                    // Show toast and send WhatsApp
                     showToast();
                     sendToWhatsApp(formData, currentLang);
+                    
+                    // Reset form
                     form.reset();
                     clearErrors();
                 }
@@ -1478,7 +1572,6 @@
             });
         }
 
-        // ==================== WHATSAPP SENDING ====================
         function sendToWhatsApp(formData, lang) {
             const labels = {
                 ar: {
@@ -1584,6 +1677,7 @@
                 const btn = e.target.closest('.lang-btn');
                 if (btn && btn.dataset.lang !== currentLang) applyLanguage(btn.dataset.lang);
             });
+            setupModal();
             setupSupplierForm();
             setupToastClose();
             setupScrollEffects();
